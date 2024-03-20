@@ -1,0 +1,83 @@
+{
+	"name": "mcfunction-lsp",
+	"displayName": "MCFunction LSP",
+	"description": "VSCode wrapper for MCFunction LSP",
+	"version": "0.0.1",
+	"repository": "https://github.com/mend-lang/vscode-extension",
+	"engines": {
+		"vscode": "^1.87.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"activationEvents": [
+		"onLanguage:mcfunction"
+	],
+	"main": "./dist/extension.js",
+	"contributes": {
+		"languages": [
+			{
+				"id": "mcfunction",
+				"aliases": [
+					"mcfunction",
+					"minecraft"
+				]
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "MCFunction Language Support",
+			"properties": {
+				"mcfunction-lsp.lspBinaryPath": {
+					"type": "string",
+					"default": "/usr/bin/mcfunction-lsp",
+					"description": "Path to the MCFunction Language Server binary."
+				},
+				"mcfunction-lsp.defaultPackFormat": {
+					"type": "number",
+					"default": 26,
+					"description": "The default pack-format to use if no pack.mcmeta is found"
+				},
+				"mcfunction-lsp.isVerbose": {
+					"type": "boolean",
+					"default": false,
+					"description": "Show verbose debug information"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run package",
+		"compile": "webpack",
+		"watch": "webpack --watch",
+		"package": "webpack --mode production --devtool hidden-source-map",
+		"compile-tests": "tsc -p . --outDir out",
+		"watch-tests": "tsc -p . -w --outDir out",
+		"pretest": "npm run compile-tests && npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "vscode-test"
+	},
+	"prettier": {
+		"trailingComma": "es5",
+		"tabWidth": 4,
+		"useTabs": true,
+		"semi": false,
+		"singleQuote": false
+	},
+	"devDependencies": {
+		"@types/mocha": "^10.0.6",
+		"@types/node": "18.x",
+		"@types/vscode": "^1.87.0",
+		"@typescript-eslint/eslint-plugin": "^7.0.2",
+		"@typescript-eslint/parser": "^7.0.2",
+		"@vscode/test-cli": "^0.0.6",
+		"@vscode/test-electron": "^2.3.9",
+		"@vscode/vsce": "^2.24.0",
+		"eslint": "^8.56.0",
+		"ts-loader": "^9.5.1",
+		"typescript": "^5.3.3",
+		"vscode-languageclient": "^9.0.1",
+		"webpack": "^5.90.3",
+		"webpack-cli": "^5.1.4"
+	}
+}
